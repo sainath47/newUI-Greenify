@@ -34,6 +34,8 @@ import Charts from "../../pages/charts";
 
 // context
 import { useLayoutState } from "../../context/LayoutContext";
+import AllotteeForm from "../../pages/AllotteeForm/AllotteeForm";
+import VendorForm from "../../pages/VendorForm/VendorForm";
 
 function Layout(props) {
   var classes = useStyles();
@@ -57,6 +59,8 @@ function Layout(props) {
               <Route path="/app/typography" component={Typography} />
               <Route path="/app/tables" component={Tables} />
               <Route path="/app/notifications" component={Notifications} />
+              <Route path="/app/allottee-form" component={AllotteeForm} />
+              <Route path="/app/vendor-form" component={VendorForm} />
               <Route
                 exact
                 path="/app/ui"

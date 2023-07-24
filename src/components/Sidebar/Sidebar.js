@@ -31,7 +31,15 @@ import {
 
 const structure = [
   { id: 0, label: "Dashboard", link: "/app/dashboard", icon: <HomeIcon /> },
-  {
+  { id: 0, label: "User", link: "/app/allottee-form", icon: <HomeIcon /> },
+  { id: 0, label: "Meters", link: "/app/dashboard", icon: <HomeIcon /> },
+  { id: 0, label: "Stocks", link: "/app/dashboard", icon: <HomeIcon /> },
+  { id: 0, label: "Sites", link: "/app/dashboard", icon: <HomeIcon /> },
+  { id: 0, label: "Installation", link: "/app/dashboard", icon: <HomeIcon /> },
+
+  { id: 5, type: "divider" },
+  { id: 6, type: "title", label: "HELP" },
+    {
     id: 1,
     label: "Typography",
     link: "/app/typography",
@@ -55,8 +63,6 @@ const structure = [
       { label: "Maps", link: "/app/ui/maps" },
     ],
   },
-  { id: 5, type: "divider" },
-  { id: 6, type: "title", label: "HELP" },
   { id: 7, label: "Library", link: "https://flatlogic.com/templates", icon: <LibraryIcon /> },
   { id: 8, label: "Support", link: "https://flatlogic.com/forum", icon: <SupportIcon /> },
   { id: 9, label: "FAQ", link: "https://flatlogic.com/forum", icon: <FAQIcon /> },
