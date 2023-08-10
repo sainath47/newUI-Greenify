@@ -245,7 +245,7 @@ const AllotteeForm = () => {
                 fullWidth
                 id="name"
                 label="Company/Firm Name"
-                autoFocus
+                
                 value={formData.name}
                 onChange={handleChange}
               />
@@ -301,7 +301,7 @@ const AllotteeForm = () => {
                 fullWidth
                 id="name"
                 label="Company/Firm GST No."
-                autoFocus
+                
                 value={formData.name}
                 onChange={handleChange}
               />
@@ -427,7 +427,7 @@ const AllotteeForm = () => {
                 fullWidth
                 id="name"
                 label="Bank Name"
-                autoFocus
+                
                 value={formData.name}
                 onChange={handleChange}
               />
@@ -467,7 +467,7 @@ const AllotteeForm = () => {
                 fullWidth
                 id="name"
                 label="IFSC Code"
-                autoFocus
+                
                 value={formData.name}
                 onChange={handleChange}
               />

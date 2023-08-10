@@ -20,7 +20,11 @@ import logo from "./logo.svg";
 import google from "../../images/google.svg";
 
 // context
-import { useUserDispatch, loginUser } from "../../context/UserContext";
+import {
+  useUserDispatch,
+  loginUser,
+  registerUser,
+} from "../../context/UserContext";
 
 function Login(props) {
   var classes = useStyles();
@@ -31,17 +35,22 @@ function Login(props) {
   // local
   var [isLoading, setIsLoading] = useState(false);
   var [error, setError] = useState(null);
+  var [errorText, setErrorText] = useState(null);
   var [activeTabId, setActiveTabId] = useState(0);
-  var [nameValue, setNameValue] = useState("");
-  var [loginValue, setLoginValue] = useState("admin@flatlogic.com");
-  var [passwordValue, setPasswordValue] = useState("password");
+  var [firstNameValue, setFirstNameValue] = useState("");
+  var [lastNameValue, setlastNameValue] = useState("");
+  var [mobileNoValue, setMobileNoValue] = useState("");
+  var [email, setEmail] = useState("");
+  var [passwordValue, setPasswordValue] = useState("");
 
   return (
     <Grid container className={classes.container}>
-      <div className={classes.logotypeContainer}>
+      {/* <div className={classes.logotypeContainer}>
         <img src={logo} alt="logo" className={classes.logotypeImage} />
         <Typography className={classes.logotypeText}>Material Admin</Typography>
-      </div>
+      </div> */}
+      <img src="./greenify-removebg.png" alt="/" />
+
       <div className={classes.formContainer}>
         <div className={classes.form}>
           <Tabs
@@ -57,20 +66,12 @@ function Login(props) {
           {activeTabId === 0 && (
             <React.Fragment>
               <Typography variant="h1" className={classes.greeting}>
-                Good Morning, User
+                Hello User!
               </Typography>
-              <Button size="large" className={classes.googleButton}>
-                <img src={google} alt="google" className={classes.googleIcon} />
-                &nbsp;Sign in with Google
-              </Button>
-              <div className={classes.formDividerContainer}>
-                <div className={classes.formDivider} />
-                <Typography className={classes.formDividerWord}>or</Typography>
-                <div className={classes.formDivider} />
-              </div>
+
               <Fade in={error}>
                 <Typography color="secondary" className={classes.errorMessage}>
-                  Something is wrong with your login or password :(
+                  Something is wrong with your email or password :(
                 </Typography>
               </Fade>
               <TextField
@@ -81,10 +82,10 @@ function Login(props) {
                     input: classes.textField,
                   },
                 }}
-                value={loginValue}
-                onChange={e => setLoginValue(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 margin="normal"
-                placeholder="Email Adress"
+                placeholder="Email Address"
                 type="email"
                 fullWidth
               />
@@ -97,7 +98,7 @@ function Login(props) {
                   },
                 }}
                 value={passwordValue}
-                onChange={e => setPasswordValue(e.target.value)}
+                onChange={(e) => setPasswordValue(e.target.value)}
                 margin="normal"
                 placeholder="Password"
                 type="password"
@@ -108,17 +109,16 @@ function Login(props) {
                   <CircularProgress size={26} className={classes.loginLoader} />
                 ) : (
                   <Button
-                    disabled={
-                      loginValue.length === 0 || passwordValue.length === 0
-                    }
+                    disabled={email.length === 0 || passwordValue.length === 0}
                     onClick={() =>
                       loginUser(
                         userDispatch,
-                        loginValue,
+                        email,
                         passwordValue,
                         props.history,
                         setIsLoading,
                         setError,
+                        setErrorText,
                       )
                     }
                     variant="contained"
@@ -148,21 +148,51 @@ function Login(props) {
               </Typography>
               <Fade in={error}>
                 <Typography color="secondary" className={classes.errorMessage}>
-                  Something is wrong with your login or password :(
+                  Something is wrong with your email or password :(
                 </Typography>
               </Fade>
               <TextField
-                id="name"
+                id="firstName"
                 InputProps={{
                   classes: {
                     underline: classes.textFieldUnderline,
                     input: classes.textField,
                   },
                 }}
-                value={nameValue}
-                onChange={e => setNameValue(e.target.value)}
+                value={firstNameValue}
+                onChange={(e) => setFirstNameValue(e.target.value)}
                 margin="normal"
-                placeholder="Full Name"
+                placeholder="First Name"
+                type="text"
+                fullWidth
+              />
+              <TextField
+                id="lastName"
+                InputProps={{
+                  classes: {
+                    underline: classes.textFieldUnderline,
+                    input: classes.textField,
+                  },
+                }}
+                value={lastNameValue}
+                onChange={(e) => setlastNameValue(e.target.value)}
+                margin="normal"
+                placeholder="Last Name"
+                type="text"
+                fullWidth
+              />
+              <TextField
+                id="mobileNo"
+                InputProps={{
+                  classes: {
+                    underline: classes.textFieldUnderline,
+                    input: classes.textField,
+                  },
+                }}
+                value={mobileNoValue}
+                onChange={(e) => setMobileNoValue(e.target.value)}
+                margin="normal"
+                placeholder="Mobile No."
                 type="text"
                 fullWidth
               />
@@ -174,10 +204,10 @@ function Login(props) {
                     input: classes.textField,
                   },
                 }}
-                value={loginValue}
-                onChange={e => setLoginValue(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 margin="normal"
-                placeholder="Email Adress"
+                placeholder="Email Address"
                 type="email"
                 fullWidth
               />
@@ -190,7 +220,7 @@ function Login(props) {
                   },
                 }}
                 value={passwordValue}
-                onChange={e => setPasswordValue(e.target.value)}
+                onChange={(e) => setPasswordValue(e.target.value)}
                 margin="normal"
                 placeholder="Password"
                 type="password"
@@ -202,19 +232,25 @@ function Login(props) {
                 ) : (
                   <Button
                     onClick={() =>
-                      loginUser(
+                      registerUser(
                         userDispatch,
-                        loginValue,
+                        firstNameValue,
+                        lastNameValue,
+                        mobileNoValue,
+                        email,
                         passwordValue,
                         props.history,
                         setIsLoading,
                         setError,
+                        setErrorText,
                       )
                     }
                     disabled={
-                      loginValue.length === 0 ||
+                      email.length === 0 ||
                       passwordValue.length === 0 ||
-                      nameValue.length === 0
+                      lastNameValue.length === 0 ||
+                      mobileNoValue.length === 0 ||
+                      firstNameValue.length === 0
                     }
                     size="large"
                     variant="contained"
@@ -226,27 +262,9 @@ function Login(props) {
                   </Button>
                 )}
               </div>
-              <div className={classes.formDividerContainer}>
-                <div className={classes.formDivider} />
-                <Typography className={classes.formDividerWord}>or</Typography>
-                <div className={classes.formDivider} />
-              </div>
-              <Button
-                size="large"
-                className={classnames(
-                  classes.googleButton,
-                  classes.googleButtonCreating,
-                )}
-              >
-                <img src={google} alt="google" className={classes.googleIcon} />
-                &nbsp;Sign in with Google
-              </Button>
             </React.Fragment>
           )}
         </div>
-        <Typography color="primary" className={classes.copyright}>
-        © 2014-{new Date().getFullYear()} <a style={{ textDecoration: 'none', color: 'inherit' }} href="https://flatlogic.com" rel="noopener noreferrer" target="_blank">Flatlogic</a>, LLC. All rights reserved.
-        </Typography>
       </div>
     </Grid>
   );
